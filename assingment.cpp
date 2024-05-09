@@ -2,6 +2,7 @@
 using namespace std;
 int a[10];
 int HashTableSize = 61;
+int T;
 
 int Hash(string sym)
 {
@@ -59,23 +60,21 @@ class SymbolTable{
     {
         int y = Hash(obj1.getName());
         ht[y].push_back(obj1);
-        cout<<"Inserted into Hash Table!\n";
+        cout<<"Inserted at Position "<<y<<","<<ht[y].size() -1 <<"\n";
     }
 };
 
 
 int main()
 {
-    string s = "var_1";
-    int w = Hash(s);
-    cout<<w<<endl;
-
     while(1)
     {
         string a1,b1,c1;
         cin>>a1>>b1>>c1;
         if(a1=="I"){
-
+            Symbolinfo obj1(b1,c1);
+            SymbolTable t1;
+            t1.insrt(obj1);
         }
         else if(a1=="P")
         {
