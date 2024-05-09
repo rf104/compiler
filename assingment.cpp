@@ -1,13 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 int a[10];
+int HashTableSize = 61;
 
 int Hash(string sym)
 {
     int l = sym.length();
-    int t = (l*202214056) % 10;
-    a[t]++;
-    return t;
+    int i ;
+    int s = 0;
+    for(i= 0;i<l;i++)
+    {
+        int u = sym[i];
+        s = s + u;
+    }
+    int r  = (s * 56) % 10;
+    return r;
 }
 
 class Symbolinfo{
@@ -59,5 +66,30 @@ class SymbolTable{
 
 int main()
 {
-    
+    string s = "var_1";
+    int w = Hash(s);
+    cout<<w<<endl;
+
+    while(1)
+    {
+        string a1,b1,c1;
+        cin>>a1>>b1>>c1;
+        if(a1=="I"){
+
+        }
+        else if(a1=="P")
+        {
+
+        }
+        else if(a1=="L")
+        {
+
+        }
+        else if(a1=="D")
+        {
+            
+        }
+    }
+
+
 }
