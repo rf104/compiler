@@ -59,16 +59,14 @@ class SymbolTable{
         for (map<int,list<Symbolinfo>> :: iterator it = ht.begin(); it!= ht.end(); it++)
         {
             cout<<"Position: "<<it->first<<"->";
-            /*for(auto p : it->second)
-            {
-                cout<<"Name: "<<p.getName()<<" Type: "<<p.getType()<<" <-||-> ";
-            }*/
+
             list<Symbolinfo>& value = it->second;
             for (list<Symbolinfo>::iterator it2 = value.begin(); it2 != value.end(); ++it2) {
                 Symbolinfo& p = *it2;
 
-                cout << p.getName() << " (" << p.getType() << ")  ";
+                cout <<"<"<<p.getName()<<","<< p.getType() <<">  ";
             }
+            cout<<endl;
         }
     }
     void insrt(Symbolinfo obj1)
@@ -76,6 +74,27 @@ class SymbolTable{
         int y = Hash(obj1.getName());
         ht[y].push_back(obj1);
         cout<<"Inserted at Position "<<y<<","<<ht[y].size() -1 <<"\n";
+    }
+    void lookup(string s)
+    {
+        int flg = 1;
+        map<int,list<Symbolinfo>>::iterator it;
+        for(it=ht.begin();it!=ht.end();it++)
+        {
+            list<Symbolinfo>&value = it->second;
+            list<Symbolinfo>:: iterator it2 ;
+            for(it2=value.begin();it2!=value.end();it++)
+            {
+                Symbolinfo& p = *it2;
+                if(p.getName()==s){
+                    cout<<"FOUND";
+                    flg = 0;
+                    break;
+                }
+            }
+            if(flg==0) break;
+        }
+        if(flg==1) cout<<"NOT FOUND";
     }
 };
 
@@ -87,8 +106,9 @@ int main()
     while(1)
     {
         string a1,b1,c1;
-        cin>>a1>>b1>>c1;
+        cin>>a1;
         if(a1=="I"){
+            cin>>b1>>c1;
             obj1.setter(b1,c1);
             t1.insrt(obj1);
         }
@@ -98,11 +118,15 @@ int main()
         }
         else if(a1=="L")
         {
-
+            cin>>b1;
+            t1.lookup(b1);
         }
         else if(a1=="D")
         {
 
+        }
+        else{
+            cout<<"Invalid Input!";
         }
     }
 }
