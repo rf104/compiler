@@ -31,6 +31,11 @@ class Symbolinfo{
         this->name = a;
         this->symbol_type =  b;
     }
+    void setter(string a, string b)
+    {
+        this->name = a;
+        this->symbol_type =  b;
+    }
     string getName()
     {
         return this->name;
@@ -47,13 +52,23 @@ class Symbolinfo{
 };
 
 class SymbolTable{
-    map<int,vector<Symbolinfo>>ht;
+    map<int,list<Symbolinfo>>ht;
     public:
     void print()
     {
-        for (auto it = ht.begin(); it!= ht.end(); it++)
+        for (map<int,list<Symbolinfo>> :: iterator it = ht.begin(); it!= ht.end(); it++)
         {
-            cout<<it->first<<"\n";
+            cout<<"Position: "<<it->first<<"->";
+            /*for(auto p : it->second)
+            {
+                cout<<"Name: "<<p.getName()<<" Type: "<<p.getType()<<" <-||-> ";
+            }*/
+            list<Symbolinfo>& value = it->second;
+            for (list<Symbolinfo>::iterator it2 = value.begin(); it2 != value.end(); ++it2) {
+                Symbolinfo& p = *it2;
+
+                cout << p.getName() << " (" << p.getType() << ")  ";
+            }
         }
     }
     void insrt(Symbolinfo obj1)
@@ -67,18 +82,19 @@ class SymbolTable{
 
 int main()
 {
+    SymbolTable t1;
+    Symbolinfo obj1;
     while(1)
     {
         string a1,b1,c1;
         cin>>a1>>b1>>c1;
         if(a1=="I"){
-            Symbolinfo obj1(b1,c1);
-            SymbolTable t1;
+            obj1.setter(b1,c1);
             t1.insrt(obj1);
         }
         else if(a1=="P")
         {
-
+            t1.print();
         }
         else if(a1=="L")
         {
@@ -86,9 +102,7 @@ int main()
         }
         else if(a1=="D")
         {
-            
+
         }
     }
-
-
 }
