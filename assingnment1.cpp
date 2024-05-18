@@ -83,7 +83,7 @@ class SymbolTable{
         {
             list<Symbolinfo>&value = it->second;
             list<Symbolinfo>:: iterator it2 ;
-            for(it2=value.begin();it2!=value.end();it++)
+            for(it2=value.begin();it2!=value.end();it2++)
             {
                 Symbolinfo& p = *it2;
                 if(p.getName()==s){
@@ -96,6 +96,7 @@ class SymbolTable{
         }
         if(flg==1) cout<<"NOT FOUND";
     }
+
     void Delete(string s)
     {
         int flg = 1;
@@ -104,18 +105,19 @@ class SymbolTable{
         {
             list<Symbolinfo>&value = it->second;
             list<Symbolinfo>:: iterator it2 ;
-            for(it2=value.begin();it2!=value.end();it++)
+            for(it2=value.begin();it2!=value.end();it2++)
             {
                 Symbolinfo& p = *it2;
                 if(p.getName()==s){
-                    value.remove(s);
+                    //value.remove(s);
+                    it2 = value.erase(it2);
                     flg = 0;
                     break;
                 }
             }
             if(flg==0){
 
-              break;
+            break;
             }
         }
         if(flg==1) cout<<"NOT FOUND";
@@ -148,7 +150,7 @@ int main()
         else if(a1=="D")
         {
             cin>>b1;
-            t1.Delete(b1)
+            t1.Delete(b1);
         }
         else{
             cout<<"Invalid Input!";
